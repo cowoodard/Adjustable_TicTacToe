@@ -101,7 +101,7 @@ int main()
             board[selection-1] = player2;
             boardGraphic (board);
             if (winner == true){
-                cout << "Congratulations Player 1 has won the game" << endl;
+                cout << "Congratulations Player 2 has won the game" << endl;
                 break;
             }
             else{

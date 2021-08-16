@@ -68,7 +68,6 @@ bool boardStatus (vector<string>& showBoard, int& boardWidth){
             //Checking for a winner on the diagonals, board index positions 0-4-8 & 6-4-2 in a 3x3 for reference
             int q = 0; //Settings comparison for vector index 0 to check downward diagonal
             for (int w = 1; w <= boardWidth - 1; w++){
-                cout << "First Diagonal " << showBoard[q] << " " <<showBoard[(w * boardWidth) + w] << endl;
                 if (winnerFound == true){
                     break;
                 }
@@ -85,15 +84,14 @@ bool boardStatus (vector<string>& showBoard, int& boardWidth){
             }
             q = boardWidth - 1; //Settings comparison for vector index boardWidth to check upward diagonal
             for (int r = 1; r <= boardWidth - 1; r++){
-                cout << "Second Diagonal " << showBoard[q] << " " <<showBoard[q + (r * boardWidth) - 1] << endl;
                 if (winnerFound == true){
                     break;
                 }
-                if (showBoard[q] != showBoard[q + (r * boardWidth) - 1]){
+                if (showBoard[q] != showBoard[q + (r * (boardWidth - 1))]){
                     break;
                 }
-                if (showBoard[q] == showBoard[q + (r * boardWidth) - 1] && (r == boardWidth - 1)){
-                    winnerFound == true;
+                if (showBoard[q] == showBoard[q + (r * (boardWidth - 1))] && (r == boardWidth - 1)){
+                    winnerFound = true;
                 }
                 else{}
             }
@@ -115,16 +113,12 @@ int main()
     string player1, player2, board;
     int selection, currentPlayer, boardSize, boardNSize;
 
-    //Populates board with options
-//    for (int i = 0; i <= (sizeof(board)/sizeof(board[0]))-1; i++){
-//        board[i] = to_string(i + 1);
-//    }
-
     cout << "Welcome to TicTacToe" << endl;
     cout << "Would you like to play? (Type Yes or No)"<< endl;
     cin >> start;
 
     if (start == "Yes"){
+
         cout << "Welcome" << endl;
         cout << "This is a two player game" << endl;
         cout << "Player 1 chose X or O " << endl;
@@ -141,6 +135,7 @@ int main()
         boardSize = boardNSize * boardNSize;
         vector<string> board;
 
+        //Populates single dimension vector with values to be displayed corresponding to board positions
         for (int i = 0; i < boardSize; i++){
             board.push_back(to_string(i+1));
         }
@@ -148,10 +143,11 @@ int main()
         cout << "Player 1 will play as " << player1 << endl;
         cout << "Player 2 will play as " << player2 << endl;
         cout << "Lets begin" << endl;
-        // boardStatus (boardPtr) call function to display current board passing pointers of player
+
         boardGraphic (board, boardNSize);
         int numTurns = 0;
         currentPlayer = 1;
+
         //While loop where the game is played that exits when a winner is declared.
         while (winner != true){
 
@@ -159,7 +155,6 @@ int main()
             cin >> selection;
             if (currentPlayer == 1){
                 board[selection-1] = player1;
-                //board
             } else {
                 board[selection-1] = player2;
             }

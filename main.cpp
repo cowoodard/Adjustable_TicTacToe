@@ -2,10 +2,13 @@
 #include <iomanip>
 #include <string>
 #include <vector>
+#include <cmath>
 
 using namespace std;
 
-void boardGraphic (vector<string>& displayBoard, int& printWidth){
+void boardGraphic (vector<string>& displayBoard){
+
+    int printWidth = sqrt(displayBoard.size());
 
     for (int i = 0; i <= printWidth - 1; i++){
         cout << "|";
@@ -21,10 +24,11 @@ void boardGraphic (vector<string>& displayBoard, int& printWidth){
 }
 
 //This function tests the board matrix for a winner
-bool boardStatus (vector<string>& showBoard, int& boardWidth){
+bool boardStatus (vector<string>& showBoard){
 
     bool winnerFound = false;
     bool checkComplete = false;
+    int boardWidth = sqrt(showBoard.size());
 
     while (winnerFound == false && checkComplete == false){
             //Checking for a winner on the horizontals
@@ -144,7 +148,7 @@ int main()
         cout << "Player 2 will play as " << player2 << endl;
         cout << "Lets begin" << endl;
 
-        boardGraphic (board, boardNSize);
+        boardGraphic (board);
         int numTurns = 0;
         currentPlayer = 1;
 
@@ -158,8 +162,8 @@ int main()
             } else {
                 board[selection-1] = player2;
             }
-            boardGraphic (board, boardNSize);
-            winner = boardStatus(board, boardNSize);
+            boardGraphic (board);
+            winner = boardStatus(board);
             if (winner == true){
                 cout << "Congratulations Player " << currentPlayer << " has won the game" << endl;
                 break;

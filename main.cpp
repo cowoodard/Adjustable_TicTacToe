@@ -10,6 +10,14 @@ void boardGraphic(vector<string>& displayBoard) {
 
     int printWidth = sqrt(displayBoard.size());
 
+    //calculates the set width paramater for printing the board using the last space character length
+    string singleSpaceString = to_string(displayBoard.size());
+    int singleSpaceWidth = 0;
+    for (auto i = singleSpaceString.cbegin(); i != singleSpaceString.cend(); ++i) {
+        singleSpaceWidth++;
+    }
+
+    //start of the display of the current board.
     for (int x = 0; x <= printWidth - 1; x++) {
         cout << "------";
     }
@@ -17,7 +25,7 @@ void boardGraphic(vector<string>& displayBoard) {
     for (int i = 0; i <= printWidth - 1; i++) {
         cout << "|";
         for (int j = 0; j <= printWidth - 1; j++) {
-            cout << setw(3) << displayBoard[(i * printWidth) + j] << " | ";
+            cout << setw(singleSpaceWidth) << displayBoard[(i * printWidth) + j] << " | ";
         }
         cout << endl;
         for (int k = 0; k <= printWidth - 1; k++) {
@@ -118,7 +126,8 @@ int checkSpace (vector<string>& board, int position, string player1marker, strin
     if (board[position - 1] == player1marker || board[position - 1] == player2marker){
         bool validPlay = false;
         while (validPlay != true){
-            boardGraphic(board);
+            //boardGraphic(board);
+            cout << "ERROR: Space already taken" << endl;
             cout << "Please select a position that isn't taken already" << endl;
             cin >> position;
             if (board[position - 1] == player1marker || board[position - 1] == player2marker){
@@ -144,10 +153,10 @@ int main()
     int selection, currentPlayer, boardSize, boardNSize;
 
     cout << "Welcome to TicTacToe" << endl;
-    cout << "Would you like to play? (Type Yes or No)" << endl;
+    cout << "Would you like to play? (Type Y or N)" << endl;
     cin >> start;
 
-    if (start == "Yes") {
+    if (start == "Y") {
 
         cout << "Welcome" << endl;
         cout << "This is a two player game" << endl;

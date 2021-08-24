@@ -18,18 +18,19 @@ void boardGraphic(vector<string>& displayBoard) {
     }
 
     //start of the display of the current board.
-    for (int x = 0; x <= printWidth - 1; x++) {
-        cout << "------";
+    int boardCharacterWidth = ((singleSpaceWidth + 2) * printWidth + (printWidth + 1)); //calculates total character width of the board
+    for (int x = 1; x <= boardCharacterWidth; x++) {
+        cout << "-";
     }
     cout << endl;
     for (int i = 0; i <= printWidth - 1; i++) {
-        cout << "|";
+        cout << "| ";
         for (int j = 0; j <= printWidth - 1; j++) {
             cout << setw(singleSpaceWidth) << displayBoard[(i * printWidth) + j] << " | ";
         }
         cout << endl;
-        for (int k = 0; k <= printWidth - 1; k++) {
-            cout << "------";
+        for (int k = 1; k <= boardCharacterWidth; k++) {
+            cout << "-";
         }
         cout << endl;
     }
@@ -156,7 +157,7 @@ int main()
     cout << "Would you like to play? (Type Y or N)" << endl;
     cin >> start;
 
-    if (start == "Y") {
+    if (start == "Y" || start == "y") {
 
         cout << "Welcome" << endl;
         cout << "This is a two player game" << endl;
